@@ -1,0 +1,29 @@
+version: '3.2'
+
+
+services:
+
+  docker-alpine-router-build:
+    build:
+      context: .      
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    environment:
+      #- DEBUG=true
+      - DNS_ADDRESS=8.8.8.8
+      - DEF_IF_GATEWAY=172.18.0.2
+      - DEF_IF_ALLOW_ROUTING=true
+      - DEFAULT_ROUTES=192.168.99.0/24
+      #- PORT_FORWARD_HOST=192.168.99.1
+      - PORT_FORWARD_PORTS=5900,3389,53:192.168.99.2,54:192.168.99.2:53,12:54
+      
+    #volumes:
+    #  - ./configs/openvpnconfigs/:/etc/openvpn/
+    #  - ./configs/entrypoint/:/etc/entrypoint.d/
+
+
+networks:
+  bridge_vlan:
+    external: true
+
