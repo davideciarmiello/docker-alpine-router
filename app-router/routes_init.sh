@@ -49,7 +49,7 @@ fi
 
 if [ "${DEFAULT_ROUTES}" == "" ]; then
     if [ "${PORT_FORWARD_HOST}" != "" ]; then
-        HOST_ROUTES="${PORT_FORWARD_HOST}/32"
+        DEFAULT_ROUTES="${PORT_FORWARD_HOST}/32"
     fi
 fi
 
